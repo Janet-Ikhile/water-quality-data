@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-r from-indigo-200">
+  <h1 class="text-3xl font-bold text-center py-2">
+    Submit your water testing data
+  </h1>
+  <div class="flex flex-row justify-center items-center backdrop-blur-3xl py-2">
+    <div class="h-56 grid grid-cols-2 gap-4 content-start ...">
+      <div>PH</div>
+      <div>
+        <select class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." id="PH" name="PH">
+          <option value="6.0">6.0</option>
+          <option value="6.4">6.4</option>
+          <option value="6.8">6.8</option>
+          <option value="7.0">7.0</option>
+          <option value="7.2">7.2</option>
+          <option value="7.6">7.6</option>
+          <option value="8.0">7.8</option>
+          <option value="8.4">8.0</option>
+          <option value="8.8">8.2</option>
+          <option value="8.8">8.4</option>
+          <option value="8.8">8.8</option>
+        </select>
+      </div>
+      <div>Ammonia</div>
+      <div>
+        <select class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." id="ammonia" name="ammonia">
+          <option value="0">0</option>
+          <option value="0.25">0.25</option>
+          <option value="0.50">0.50</option>
+          <option value="1.0">1.0</option>
+          <option value="2.0">2.0</option>
+          <option value="4.0">4.0</option>
+          <option value="8.0">8.0</option>
+        </select>
+      </div>
+      <div>Nitrite</div>
+      <div>
+        <select class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." id="nitrite" name="nitrite">
+          <option value="0">0</option>
+          <option value="0.25">0.25</option>
+          <option value="0.50">0.50</option>
+          <option value="1.0">1.0</option>
+          <option value="2.0">2.0</option>
+        </select>
+      </div>
+      <div>Nitrate</div>
+      <div>
+        <select class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." id="nitrate" name="nitrate">
+          <option value="0">0</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="40">40</option>
+          <option value="80">80</option>
+          <option value="160">160</option>
+        </select>
+      </div>
+      <div>Location</div>
+      <div><input class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." type="text" id="location"
+          name="location"></div>
+      <div></div>
+      <div> <button id="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          submit
+        </button></div>
+    </div>
+  </div>
+
+</body>
+
+
+</html>
