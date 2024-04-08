@@ -6,7 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-
+<script>
+  console.log(window.location.href)
+  function submitData()
+  {
+    const phValue = document. getElementById("PH").value; 
+    const ammoniaValue = document. getElementById("ammonia").value; 
+    const nitriteValue = document. getElementById("nitrite").value; 
+    const nitrateValue = document. getElementById("nitrate").value; 
+    const locationValue = document. getElementById("location").value; 
+    if(locationValue === '' )
+    {
+      alert("Need to add a location, City, County works");
+      return;
+    }
+    //TODO: Add API post call here
+    window.location.href = "/followup.html";
+  }
+</script>
 <body class="bg-gradient-to-r from-indigo-200">
   <h1 class="text-3xl font-bold text-center py-2">
     Submit your water testing data
@@ -67,8 +84,8 @@
       <div><input class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." type="text" id="location"
           name="location"></div>
       <div></div>
-      <div> <button id="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          submit
+      <div> <button onclick="submitData()" id="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Submit
         </button></div>
     </div>
   </div>
