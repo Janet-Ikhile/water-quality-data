@@ -63,7 +63,8 @@ function submitData() {
     //TODO: Add API post call here
     console.log(`the values are ${phValue},${ammoniaValue}, ${nitriteValue}, ${nitrateValue}, ${locationValue}`);
     writeUserData(phValue, ammoniaValue, nitriteValue, nitrateValue, locationValue);
-
+    window.location.href = "/followup.html";
+    //location.reload();
     //window.location.href = "/followup.html";
 }
 
