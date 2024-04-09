@@ -7,24 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet" />
     <title>Follow-Up Questions on Water Quality Data Submission</title>
-    <script src="test.js" defer></script>
 </head>
-<script>
-function submitData()
-  {
-    const easeOfSubmission = document. getElementById("easeOfSubmission").value; 
-    const likesDislikes = document. getElementById("likesDislikes").value; 
-    const preferredMethod = document. getElementById("preferredMethod").value; 
-    // I dont think this is needed,let them submit the amount of feedack that they nedd
-    // if(likesDislikes === ''  || preferredMethod === '')
-    // {
-    //   alert("");
-    //   return;
-    // }
-    //TODO: Add API post call here
-    window.location.href = "/thank-you.html";
-  }
-</script>
 
 <body>
     <div class="container">
@@ -48,10 +31,10 @@ function submitData()
                 <textarea id="reasonForPreference" name="reasonForPreference" rows="4" placeholder="Explain why"
                     required></textarea>
             </div>
-            <button type="submit" class="submit-btn" onclick="submitData()">Submit</button>
+            <button id="submitFollowUp" class="submit-btn">Submit</button>
         </form>
     </div>
-
+    <script type="module" src="test.js"></script>
 </body>
 
 </html>

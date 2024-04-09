@@ -5,25 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module" src="test.js"></script>
+
 </head>
-<script>
-  console.log(window.location.href)
-  function submitData()
-  {
-    const phValue = document. getElementById("PH").value; 
-    const ammoniaValue = document. getElementById("ammonia").value; 
-    const nitriteValue = document. getElementById("nitrite").value; 
-    const nitrateValue = document. getElementById("nitrate").value; 
-    const locationValue = document. getElementById("location").value; 
-    if(locationValue === '' )
-    {
-      alert("Need to add a location, City, County works");
-      return;
-    }
-    //TODO: Add API post call here
-    window.location.href = "/followup.html";
-  }
-</script>
+
 <body class="body">
   <h1 class="text-3xl font-bold text-center py-2">
     Submit your water testing data
@@ -83,9 +68,10 @@
       <div>Location</div>
       <div>
         <select class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." id="location" name="location">
-        </select></div>
+        </select>
+      </div>
       <div></div>
-      <div> <button onclick="submitData()" id="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+      <div> <button id="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
           Submit
         </button></div>
     </div>
@@ -94,32 +80,31 @@
 </body>
 <script>
   fetch('utahCities.txt')
-      .then(response => response.text())
-      .then(data => {
-          const locations = data.split(',').map(location => location.trim());
-          const cityArray = []
-          const selectElement = document.getElementById('location');
-          locations.forEach((location) => {
-              const option = document.createElement('option');
-              option.value = location; 
-              option.textContent = location.replaceAll("'", "");
-              if(!cityArray.includes(location.replaceAll("'", "")))
-              {
-              cityArray.push(location.replaceAll("'", ""));
-              }
-          });
-          cityArray.sort();
-          cityArray.forEach((location) => {
-              const option = document.createElement('option');
-              option.value = location; 
-              option.textContent = location.replaceAll("'", "");
-              cityArray.push(location.replaceAll("'", ""));
-              selectElement.appendChild(option);
-          });
-      
-        })
-      .catch(error => console.error('Error fetching data:', error));
-  </script>
+    .then(response => response.text())
+    .then(data => {
+      const locations = data.split(',').map(location => location.trim());
+      const cityArray = []
+      const selectElement = document.getElementById('location');
+      locations.forEach((location) => {
+        const option = document.createElement('option');
+        option.value = location;
+        option.textContent = location.replaceAll("'", "");
+        if (!cityArray.includes(location.replaceAll("'", ""))) {
+          cityArray.push(location.replaceAll("'", ""));
+        }
+      });
+      cityArray.sort();
+      cityArray.forEach((location) => {
+        const option = document.createElement('option');
+        option.value = location;
+        option.textContent = location.replaceAll("'", "");
+        cityArray.push(location.replaceAll("'", ""));
+        selectElement.appendChild(option);
+      });
+
+    })
+    .catch(error => console.error('Error fetching data:', error));
+</script>
 
 
 </html>
