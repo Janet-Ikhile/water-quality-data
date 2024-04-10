@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
-import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+import { getDatabase, ref, push,onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -123,5 +123,17 @@ async function writeUserFollowUpData(easeOfSubmission, likesDislikes, preferredM
         window.location.href = "/thank-you.html";
     });
 }
+
+const db = getDatabase();
+onValue( ref(db,'data'), (snapshot) =>
+{
+    console.log(snapshot.val());
+})
+// Attach an asynchronous callback to read the data at our posts reference
+ref('/data').on('value', (snapshot) => {
+  console.log(snapshot.val());
+}, (errorObject) => {
+  console.log('The read failed: ' + errorObject.name);
+}); 
 
 //});
