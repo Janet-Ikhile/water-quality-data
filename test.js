@@ -56,19 +56,20 @@ function submitData() {
     const nitriteValue = document.getElementById("nitrite").value;
     const nitrateValue = document.getElementById("nitrate").value;
     const locationValue = document.getElementById("location").value;
+    const date = new Date();
     if (locationValue === '') {
         alert("Need to add a location, City, County works");
         return;
     }
     //TODO: Add API post call here
     console.log(`the values are ${phValue},${ammoniaValue}, ${nitriteValue}, ${nitrateValue}, ${locationValue}`);
-    writeUserData(phValue, ammoniaValue, nitriteValue, nitrateValue, locationValue);
+    writeUserData(phValue, ammoniaValue, nitriteValue, nitrateValue, locationValue,date);
     window.location.href = "/followup.html";
     //location.reload();
     //window.location.href = "/followup.html";
 }
 
-function writeUserData(PH, ammonia, nitrite, nitrate, location) {
+function writeUserData(PH, ammonia, nitrite, nitrate, location,date) {
     const db = getDatabase();
 
     const reference = ref(db, 'data/');
@@ -77,7 +78,8 @@ function writeUserData(PH, ammonia, nitrite, nitrate, location) {
         ammonia: ammonia,
         nitrite: nitrite,
         nitrate: nitrate,
-        location: location
+        location: location,
+        date: date
     });
 }
 function submitFollowUpData() {
