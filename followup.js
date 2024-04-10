@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
 import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
 import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js';
@@ -18,74 +17,15 @@ const firebaseConfig = {
     appId: "1:615836169680:web:c7c54d68036140b7c9b5d5",
     measurementId: "G-FT0BE0PR74"
 };
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const submitButton = document.getElementById("submit");
 
+const submitFollowUpButton = document.getElementById("submitFollowUp");
 document.addEventListener('DOMContentLoaded', (event) => {
-    console.log(`Submit Button ${submitButton}`);
-    submitButton.addEventListener('click', submitData);
-    //const submitFollowUpButton = document.getElementById("submitFollowUp");
-    // submitFollowUpButton.addEventListener('click', submitFollowUpData);
+    submitFollowUpButton.addEventListener('click', submitFollowUpData);
 
 });
-document.addEventListener('DOMContentLoaded', (event) => {
-    event.preventDefault();
-    // const form = document.getElementById("followUpForm");
-    //window.location.href = "/followup.html";
-    // const form = document.getElementById('followUpForm');
-
-    // form.addEventListener('submit', function (e) {
-    //     e.preventDefault(); // Prevent the default form submission
-
-    //     // Simple validation example
-    //     const easeOfSubmission = document.getElementById('easeOfSubmission').value;
-    //     if (easeOfSubmission < 1 || easeOfSubmission > 10) {
-    //         alert('Please enter a value between 1 and 10.');
-    //         return;
-    //     }
-    // });
-    //const submitFollowUpButton = document.getElementById("submitFollowUp");
-    //submitFollowUpButton.addEventListener('click', submitFollowUpData);
-
-    //console.log(`Submit FollowUp Button ${submitFollowUpButton}`);
-});
-function submitData() {
-    const phValue = document.getElementById("PH").value;
-    const ammoniaValue = document.getElementById("ammonia").value;
-    const nitriteValue = document.getElementById("nitrite").value;
-    const nitrateValue = document.getElementById("nitrate").value;
-    const locationValue = document.getElementById("location").value;
-    const date = new Date();
-    if (locationValue === '') {
-        alert("Need to add a location, City, County works");
-        return;
-    }
-    //TODO: Add API post call here
-    console.log(`the values are ${phValue},${ammoniaValue}, ${nitriteValue}, ${nitrateValue}, ${locationValue}`);
-    writeUserData(phValue, ammoniaValue, nitriteValue, nitrateValue, locationValue, date.toString());
-    // window.location.href = "/followup.html";
-    //location.reload();
-    //window.location.href = "/followup.html";
-}
-
-async function writeUserData(PH, ammonia, nitrite, nitrate, location, date) {
-    const db = getDatabase();
-
-    const reference = ref(db, 'data/');
-    push(reference, {
-        PH: PH,
-        ammonia: ammonia,
-        nitrite: nitrite,
-        nitrate: nitrate,
-        location: location,
-        date: date
-    }).then(() => {
-        window.location.href = "/followup.html";
-    });
-}
 function submitFollowUpData() {
     console.log(`Inside submitFollowUpData`);
     const easeOfSubmission = document.getElementById("easeOfSubmission").value;
@@ -121,7 +61,5 @@ async function writeUserFollowUpData(easeOfSubmission, likesDislikes, preferredM
         reasonForPreference: reasonForPreference
     }).then(() => {
         window.location.href = "/thank-you.html";
-    });
+    })
 }
-
-//});
