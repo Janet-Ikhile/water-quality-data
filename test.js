@@ -63,13 +63,13 @@ function submitData() {
     }
     //TODO: Add API post call here
     console.log(`the values are ${phValue},${ammoniaValue}, ${nitriteValue}, ${nitrateValue}, ${locationValue}`);
-    writeUserData(phValue, ammoniaValue, nitriteValue, nitrateValue, locationValue,date);
-    window.location.href = "/followup.html";
+    writeUserData(phValue, ammoniaValue, nitriteValue, nitrateValue, locationValue, date.toString());
+    // window.location.href = "/followup.html";
     //location.reload();
     //window.location.href = "/followup.html";
 }
 
-function writeUserData(PH, ammonia, nitrite, nitrate, location,date) {
+async function writeUserData(PH, ammonia, nitrite, nitrate, location, date) {
     const db = getDatabase();
 
     const reference = ref(db, 'data/');
@@ -80,6 +80,9 @@ function writeUserData(PH, ammonia, nitrite, nitrate, location,date) {
         nitrate: nitrate,
         location: location,
         date: date
+    }).then(() => 
+    {
+        window.location.href = "/followup.html";
     });
 }
 function submitFollowUpData() {
