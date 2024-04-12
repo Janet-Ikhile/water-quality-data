@@ -9,12 +9,12 @@
 
 </head>
 
-<body class="body">
+<body class="body bg-stone-100">
   <h1 class="text-3xl font-bold text-center py-2">
     Submit your water testing data
   </h1>
   <div class="flex flex-row justify-center items-center backdrop-blur-3xl py-2 ">
-    <div class="h-56 grid grid-cols-2 gap-4 content-start ...">
+    <div class="h-90 grid grid-cols-2 gap-4 content-start bg-sky-50 px-4 py-4 rounded-md ...">
       <div>PH</div>
       <div>
         <select class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." id="PH" name="PH">
@@ -66,18 +66,29 @@
         </select>
       </div>
       <div>Location</div>
-      <div>
+      <div class="">
         <select class="outline outline-blue-300 rounded-sm hover:outline-blue-500 ..." id="location" name="location">
         </select>
       </div>
+
       <div></div>
-      <div> <button id="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+      <div><button id="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
           Submit
-        </button></div>
+        </button>
+        <button id="submittedData" onclick="seeSubmittedData()" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+          See all submitted data
+        </button>
+      </div>
     </div>
   </div>
 
 </body>
+<script>
+  function seeSubmittedData()
+  {
+    window.location.href = "/data.html";
+  }
+</script>
 <script>
   fetch('utahCities.txt')
     .then(response => response.text())

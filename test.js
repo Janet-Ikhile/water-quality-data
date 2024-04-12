@@ -129,11 +129,7 @@ onValue( ref(db,'data'), (snapshot) =>
 {
     console.log(snapshot.val());
 })
-// Attach an asynchronous callback to read the data at our posts reference
-ref('/data').on('value', (snapshot) => {
-  console.log(snapshot.val());
-}, (errorObject) => {
-  console.log('The read failed: ' + errorObject.name);
-}); 
+
+
 
 //});
