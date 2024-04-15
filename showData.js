@@ -27,8 +27,6 @@ var globalData;
 const input = document.getElementById('location');
 
 input.addEventListener('change', function (event) {
-    console.log(globalData);
-    console.log(input.value);
     if(input.value == '')
     {
         addValues(globalData);
@@ -58,7 +56,6 @@ function addValues(localData) {
         const entry = document.createElement('div');
         entry.id = "entry" + index;
         const space = document.createElement('div');
-        console.log(item);
         if (index % 2 == 0) {
             entry.className = "px-2 bg-slate-500 grid grid-rows-1 grid-flow-col gap-4 py-4"
         }
