@@ -24,27 +24,40 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 var globalData;
+const input = document.getElementById('location');
 
+input.addEventListener('change', function (event) {
+    console.log(globalData);
+    console.log(input.value);
+    addValues(globalData.filter((element) => {
+        return element.location === input.value;
+    }))
+    // Your code to handle the onchange event goes here
+});
 const db = getDatabase();
 onValue(ref(db, 'data'), (snapshot) => {
-    const selectElement = document.getElementById('dataDisplay');
     console.log(snapshot.val());
     globalData = Object.values(snapshot.val());
     //console.log(temp[0].location.localCompare(temp[1].location));
     // User can sort on here, with some filters
     globalData.sort((a, b) => { return a.location.localeCompare(b.location) });
-    globalData.forEach((item,index) => {
+    addValues(globalData);
+
+})
+
+function addValues(localData) {
+    const selectElement = document.getElementById('dataDisplay');
+    selectElement.innerHTML = '';
+    localData.forEach((item, index) => {
         const entry = document.createElement('div');
         entry.id = "entry" + index;
         const space = document.createElement('div');
         console.log(item);
-        if(index % 2 == 0)
-        {
-        entry.className = "px-2 bg-slate-500 grid grid-rows-1 grid-flow-col gap-4 py-4"
+        if (index % 2 == 0) {
+            entry.className = "px-2 bg-slate-500 grid grid-rows-1 grid-flow-col gap-4 py-4"
         }
-        else
-        {
-        entry.className = "px-2 bg-stone-200 grid grid-rows-1 grid-flow-col gap-4 py-4"
+        else {
+            entry.className = "px-2 bg-stone-200 grid grid-rows-1 grid-flow-col gap-4 py-4"
         }
         selectElement.appendChild(entry);
         space.className = "py-1";
@@ -55,13 +68,13 @@ onValue(ref(db, 'data'), (snapshot) => {
         const date = document.createElement('div');
         date.className = 'bg-green-300 py-2 rounded-xl px-2'
         const ph = document.createElement('div');
-        ph.className = getPHColor(item.PH) + ' '+ 'py-2 rounded-xl px-2'
+        ph.className = getPHColor(item.PH) + ' ' + 'py-2 rounded-xl px-2'
         const ammonia = document.createElement('div');
-        ammonia.className = getAmmoniaColor(item.ammonia) + ' '+ 'py-2 rounded-xl px-2'
+        ammonia.className = getAmmoniaColor(item.ammonia) + ' ' + 'py-2 rounded-xl px-2'
         const nitrite = document.createElement('div');
-        nitrite.className = getNitriteColor(item.nitrite) + ' '+ 'py-2 rounded-xl px-2'
+        nitrite.className = getNitriteColor(item.nitrite) + ' ' + 'py-2 rounded-xl px-2'
         const nitrate = document.createElement('div');
-        nitrate.className = getNitrateColor(item.nitrate) + ' '+ 'py-2 rounded-xl px-2'
+        nitrate.className = getNitrateColor(item.nitrate) + ' ' + 'py-2 rounded-xl px-2'
         city.textContent = "City " + item.location;
         date.textContent = "Date " + (new Date(item.date)).toLocaleDateString("en-US");
         ph.textContent = "PH  " + item.PH;
@@ -75,150 +88,115 @@ onValue(ref(db, 'data'), (snapshot) => {
         currentEntry.appendChild(nitrite);
         currentEntry.appendChild(nitrate);
     })
-})
-
-function getPHColor(ph)
-{
-    if(ph < 6.0)
-    {
+}
+function getPHColor(ph) {
+    if (ph < 6.0) {
         return "bg-yellow-100";
     }
-    else if(ph <= 6.4)
-    {
+    else if (ph <= 6.4) {
         return "bg-yellow-50";
     }
-    else if(ph <= 7.0)
-    {
+    else if (ph <= 7.0) {
         return "bg-emerald-100";
     }
-    else if(ph <= 7.2)
-    {
+    else if (ph <= 7.2) {
         return "bg-teal-100";
     }
-    else if(ph <= 7.4)
-    {
+    else if (ph <= 7.4) {
         return "bg-yellow-600";
     }
-    else if(ph <= 7.8)
-    {
+    else if (ph <= 7.8) {
         return "bg-orange-400";
     }
-    else if(ph <= 8.0)
-    {
+    else if (ph <= 8.0) {
         return "bg-orange-600";
     }
-    else if(ph <= 8.2)
-    {
+    else if (ph <= 8.2) {
         return "bg-purple-400";
     }
-    else if(ph <= 8.4)
-    {
+    else if (ph <= 8.4) {
         return "bg-purple-600";
     }
-    else if(ph >= 8.6)
-    {
+    else if (ph >= 8.6) {
         return "bg-purple-800";
     }
 
 }
 
-function getAmmoniaColor(ammonia)
-{
-    if(ammonia == 0)
-    {
+function getAmmoniaColor(ammonia) {
+    if (ammonia == 0) {
         return "bg-yellow-400";
     }
-    else if(ammonia == 0.25)
-    {
+    else if (ammonia == 0.25) {
         return "bg-lime-100";
     }
-    else if(ammonia == 0.50)
-    {
+    else if (ammonia == 0.50) {
         return "bg-lime-300";
     }
-    else if(ammonia == 1.0)
-    {
+    else if (ammonia == 1.0) {
         return "bg-lime-500";
     }
-    else if(ammonia == 2.0)
-    {
+    else if (ammonia == 2.0) {
         return "bg-green-500";
     }
-    else if(ammonia == 4.0)
-    {
+    else if (ammonia == 4.0) {
         return "bg-green-800";
     }
-    else if(ammonia == 8.0)
-    {
+    else if (ammonia == 8.0) {
         return "bg-green-900";
     }
 
 }
 
-function getNitriteColor(nitrite)
-{
-    if(nitrite == 0)
-    {
+function getNitriteColor(nitrite) {
+    if (nitrite == 0) {
         return "bg-sky-400";
     }
-    else if(nitrite == 0.25)
-    {
+    else if (nitrite == 0.25) {
         return "bg-purple-300";
     }
-    else if(nitrite == 0.50)
-    {
+    else if (nitrite == 0.50) {
         return "bg-fuchsia-300";
     }
-    else if(nitrite == 1.0)
-    {
+    else if (nitrite == 1.0) {
         return "bg-fuchsia-500";
     }
-    else if(nitrite == 2.0)
-    {
+    else if (nitrite == 2.0) {
         return "bg-fuchsia-700";
     }
-    else if(nitrite == 5.0)
-    {
+    else if (nitrite == 5.0) {
         return "bg-fuchsia-900";
     }
-    else if(nitrite == 8.0)
-    {
+    else if (nitrite == 8.0) {
         return "bg-green-900";
     }
 
 }
 
-function getNitrateColor(nitrate)
-{
-    if(nitrate == 0)
-    {
+function getNitrateColor(nitrate) {
+    if (nitrate == 0) {
         return "bg-yellow-400";
     }
-    else if(nitrate == 5)
-    {
+    else if (nitrate == 5) {
         return "bg-orange-300";
     }
-    else if(nitrate == 10)
-    {
+    else if (nitrate == 10) {
         return "bg-orange-600";
     }
-    else if(nitrate == 20)
-    {
+    else if (nitrate == 20) {
         return "bg-red-500";
     }
-    else if(nitrate == 40)
-    {
+    else if (nitrate == 40) {
         return "bg-red-700";
     }
-    else if(nitrate == 80)
-    {
+    else if (nitrate == 80) {
         return "bg-red-800";
     }
-    else if(nitrate == 160)
-    {
+    else if (nitrate == 160) {
         return "bg-red-900";
     }
 
 }
+
 
 //});
