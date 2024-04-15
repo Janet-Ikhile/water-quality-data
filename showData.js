@@ -29,10 +29,16 @@ const input = document.getElementById('location');
 input.addEventListener('change', function (event) {
     console.log(globalData);
     console.log(input.value);
+    if(input.value == '')
+    {
+        addValues(globalData);
+    }
+    else
+    {
     addValues(globalData.filter((element) => {
         return element.location === input.value;
     }))
-    // Your code to handle the onchange event goes here
+    }
 });
 const db = getDatabase();
 onValue(ref(db, 'data'), (snapshot) => {
